@@ -3,6 +3,7 @@ resource_types:
   type: docker-image
   source:
     repository: nsrivastrh/fly-resource
+    tag: latest
 
 resources:
 - name: fly-concourse-resource
