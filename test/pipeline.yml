@@ -1,0 +1,29 @@
+resource_types:
+- name: fly-custom-resource
+  type: docker-image
+  source:
+    repository: nsrivastrh/fly-resource
+
+resources:
+- name: fly-concourse-resource
+  type: fly-custom-resource
+  source:
+    path: /downloads
+    url: https://github.com/concourse/concourse/releases/download/v7.9.1/fly-7.9.1-linux-amd64.tgz
+  version:
+    cli: 7.9.1
+    platform: linux-amd64
+
+jobs:
+- name: custom-resource-job
+  plan:
+  - get: fly-concourse-resource
+    trigger: true #check resource (triggers new pipeline on new commit)
+  - put: fly-concourse-resource
+    params:
+      source:
+        path: /downloads
+        url: https://github.com/concourse/concourse/releases/download/v7.10.0/fly-7.10.0-linux-amd64.tgz
+      version:
+        cli: 7.10.0
+        platform: linux-amd64
