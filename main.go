@@ -183,7 +183,7 @@ func GetVersion(path string) (string, error) {
 }
 
 func (f *FlyResource) InstallFlyCli() (string, error) {
-	destDir := os.Args[2]
+	destDir := os.Args[1]
 	if destDir == "" {
 		destDir = "downloads"
 	}
@@ -220,7 +220,7 @@ func (f *FlyResource) InstallFlyCli() (string, error) {
 		return "", err
 	}
 
-	cliVersion, err := GetVersion(destDir + "/")
+	cliVersion, err := GetVersion(destDir)
 	if err != nil {
 		log.Println("Error occurred while getting cli version: " + err.Error())
 		return cliVersion, err

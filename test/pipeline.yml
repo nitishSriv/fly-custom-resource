@@ -1,9 +1,10 @@
 resource_types:
 - name: fly-custom-resource
-  type: docker-image
+  #type: registry-image
+  type: git
   source:
-    repository: nsrivastrh/fly-resource
-    tag: latest
+    #repository: docker.io/nsrivastrh/fly-resource:latest
+    uri: https://github.com/nitishSriv/fly-custom-resource.git
 
 resources:
 - name: fly-concourse-resource
@@ -11,6 +12,9 @@ resources:
   source:
     path: /downloads
     url: https://github.com/concourse/concourse/releases/download/v7.9.1/fly-7.9.1-linux-amd64.tgz
+  #version:
+    #cli: 7.9.1
+    #platform: linux-amd64
 
 jobs:
 - name: custom-resource-job
